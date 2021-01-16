@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PABP_Projekat2.Models.EmployeesByTerritoriesRegions>
+
+@{
+	ViewData["Title"] = "EmployeeTerritoryRegion";
+}
+
+<h1>EmployeeTerritoryRegion</h1>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">@Html.DisplayNameFor(model => model.TerritoryDescription)</th>
+				<th scope="col">@Html.DisplayNameFor(model => model.RegionDescription)</th>
+				<th scope="col">@Html.DisplayNameFor(model => model.EmployeeCount)</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var data in Model)
+			{
+				<tr>
+					<td>@data.TerritoryDescription</td>
+					<td>@data.RegionDescription</td>
+					<td>@data.EmployeeCount</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
