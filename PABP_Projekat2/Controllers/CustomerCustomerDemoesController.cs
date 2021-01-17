@@ -60,14 +60,22 @@ namespace PABP_Projekat2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo)
         {
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", customerCustomerDemo.CustomerId);
+            ViewData["CustomerTypeId"] = new SelectList(_context.CustomerDemographics, "CustomerTypeId", "CustomerTypeId", customerCustomerDemo.CustomerTypeId);
+            
+            if (_context.CustomerCustomerDemos.Contains(customerCustomerDemo))
+            {
+                ViewBag.existsCheck = "Record already exists in database!";
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(customerCustomerDemo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", customerCustomerDemo.CustomerId);
-            ViewData["CustomerTypeId"] = new SelectList(_context.CustomerDemographics, "CustomerTypeId", "CustomerTypeId", customerCustomerDemo.CustomerTypeId);
+           
             return View(customerCustomerDemo);
         }
 

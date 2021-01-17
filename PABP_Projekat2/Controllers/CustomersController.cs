@@ -12,6 +12,7 @@ namespace PABP_Projekat2.Controllers
     public class CustomersController : Controller
     {
         private readonly NorthwindContext _context;
+        private static bool sortName;
 
         public CustomersController(NorthwindContext context)
         {
@@ -19,9 +20,22 @@ namespace PABP_Projekat2.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool? sortName, int currentPage)
         {
-            return View(await _context.Customers.ToListAsync());
+            if(sortName != null)
+                CustomersController.sortName = (bool)sortName;
+            ViewData["sortName"] = !CustomersController.sortName;
+            ViewData["customersByPage"] = new decimal(5);
+
+            var customers = (await _context.Customers.ToListAsync());
+
+            ViewData["totalCount"] = customers.Count;
+
+
+            var customersOrdered = CustomersController.sortName ? customers.OrderBy(x => x.CompanyName) : customers.OrderByDescending(x => x.CompanyName);
+            customers = customersOrdered.Skip((currentPage == 1 ? 0 : currentPage) * 5).Take(5).ToList();
+
+            return View(customers);
         }
 
         // GET: Customers/Details/5

@@ -14,10 +14,12 @@ namespace PABP_Projekat2.Models
         [Key]
         [Column("CustomerID")]
         [StringLength(5)]
+        [Required(ErrorMessage ="You must choose id!")]
         public string CustomerId { get; set; }
         [Key]
         [Column("CustomerTypeID")]
         [StringLength(10)]
+        [Required(ErrorMessage = "You must choose id!")]
         public string CustomerTypeId { get; set; }
 
         [ForeignKey(nameof(CustomerId))]

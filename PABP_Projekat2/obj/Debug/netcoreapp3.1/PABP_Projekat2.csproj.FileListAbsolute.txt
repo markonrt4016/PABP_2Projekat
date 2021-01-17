@@ -331,7 +331,6 @@ C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\bin\Debug\netcorea
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\PABP_Projekat2.csprojAssemblyReference.cache
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\staticwebassets\PABP_Projekat2.StaticWebAssets.Manifest.cache
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\staticwebassets\PABP_Projekat2.StaticWebAssets.xml
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\PABP_Projekat2.MvcApplicationPartsAssemblyInfo.cache
@@ -381,3 +380,6 @@ C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcorea
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Edit.cshtml.g.cs
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
 C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeTerritoryRegion\Index.cshtml.g.cs
+C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\PABP_Projekat2.Resources.resource_bundle.resources
+C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\PABP_Projekat2.csproj.GenerateResource.cache
+C:\Users\marko\OneDrive\Desktop\PABP_2Projekat\PABP_Projekat2\obj\Debug\netcoreapp3.1\PABP_Projekat2.csprojAssemblyReference.cache
