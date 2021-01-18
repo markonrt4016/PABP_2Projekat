@@ -401,3 +401,4 @@ C:\Users\Marko\Desktop\PABP2\PABP_Projekat2\PABP_Projekat2\obj\Debug\netcoreapp3
 C:\Users\Marko\Desktop\PABP2\PABP_Projekat2\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\Products\Details.cshtml.g.cs
 C:\Users\Marko\Desktop\PABP2\PABP_Projekat2\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\Products\Edit.cshtml.g.cs
 C:\Users\Marko\Desktop\PABP2\PABP_Projekat2\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
+C:\Users\Marko\Desktop\PABP2\PABP_Projekat2\PABP_Projekat2\obj\Debug\netcoreapp3.1\Razor\Views\Shared\DeleteValidation.cshtml.g.cs

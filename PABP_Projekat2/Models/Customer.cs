@@ -23,6 +23,7 @@ namespace PABP_Projekat2.Models
         [Key]
         [Column("CustomerID")]
         [StringLength(5)]
+        [Required]
         public string CustomerId { get; set; }
         [Required]
         [StringLength(40)]

@@ -1,7 +1,7 @@
 ﻿@model PABP_Projekat2.Models.CustomerCustomerDemo
 
 @{
-    ViewData["Title"] = "Edit";
+	ViewData["Title"] = "Edit";
 }
 
 <h1>Edit</h1>
@@ -10,14 +10,33 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CustomerId" />
-            <input type="hidden" asp-for="CustomerTypeId" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+		<form asp-action="ConfirmEdit" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="CustomerId" class="control-label"></label>
+				<select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+				<span asp-validation-for="CustomerId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="CustomerTypeId" class="control-label"></label>
+				<select asp-for="CustomerTypeId" class="form-control" asp-items="ViewBag.CustomerTypeId"></select>
+				<span asp-validation-for="CustomerTypeId" class="text-danger"></span>
+			</div>
+			<input name="customerTypeIdOld" value="@ViewData["CustomerTypeIdOld"]" hidden />
+			<input name="customerIdOld" value="@ViewData["CustomerIdOld"]" hidden />
+			@if (ViewBag.existsCheck != null)
+			{
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<strong>Error!</strong> @ViewBag.existsCheck
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			}
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
     </div>
 </div>
 

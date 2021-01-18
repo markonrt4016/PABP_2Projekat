@@ -18,6 +18,7 @@ namespace PABP_Projekat2.Models
         [Key]
         [Column("CustomerTypeID")]
         [StringLength(10)]
+        [Required]
         public string CustomerTypeId { get; set; }
         [Column(TypeName = "ntext")]
         public string CustomerDesc { get; set; }

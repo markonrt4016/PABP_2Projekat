@@ -158,9 +158,15 @@ namespace PABP_Projekat2.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            if((await _context.Orders.ToListAsync()).Where(x=> x.CustomerId == id).Count() == 0 && (await _context.CustomerCustomerDemos.ToListAsync()).Where(x => x.CustomerId == id).Count() == 0)
+            {
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.checkError = "First delete all orders and demographics associated with this customer!";
+            return View("Delete", customer);
         }
 
         private bool CustomerExists(string id)

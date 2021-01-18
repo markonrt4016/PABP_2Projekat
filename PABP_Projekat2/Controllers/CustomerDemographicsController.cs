@@ -139,10 +139,17 @@ namespace PABP_Projekat2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            //var test = (await _context.CustomerCustomerDemos.ToListAsync()).Where(x => x.CustomerTypeId == id).Count();
             var customerDemographic = await _context.CustomerDemographics.FindAsync(id);
-            _context.CustomerDemographics.Remove(customerDemographic);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            if ((await _context.CustomerCustomerDemos.ToListAsync()).Where(x=>x.CustomerTypeId == id).Count() == 0)
+            {
+                _context.CustomerDemographics.Remove(customerDemographic);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.checkError = "First delete all customers associated with this demographic!";
+            return View("Delete", customerDemographic);
         }
 
         private bool CustomerDemographicExists(string id)

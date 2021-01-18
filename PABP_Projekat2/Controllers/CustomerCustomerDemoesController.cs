@@ -26,17 +26,8 @@ namespace PABP_Projekat2.Controllers
         }
 
         // GET: CustomerCustomerDemoes/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details([Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerCustomerDemo = await _context.CustomerCustomerDemos
-                .Include(c => c.Customer)
-                .Include(c => c.CustomerType)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
             if (customerCustomerDemo == null)
             {
                 return NotFound();
@@ -80,20 +71,28 @@ namespace PABP_Projekat2.Controllers
         }
 
         // GET: CustomerCustomerDemoes/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit([Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo)
         {
-            if (id == null)
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+
+            if (!_context.CustomerCustomerDemos.Contains(customerCustomerDemo))
             {
                 return NotFound();
             }
 
-            var customerCustomerDemo = await _context.CustomerCustomerDemos.FindAsync(id);
+            //var customerCustomerDemo = await _context.CustomerCustomerDemos.FindAsync(id);
             if (customerCustomerDemo == null)
             {
                 return NotFound();
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", customerCustomerDemo.CustomerId);
             ViewData["CustomerTypeId"] = new SelectList(_context.CustomerDemographics, "CustomerTypeId", "CustomerTypeId", customerCustomerDemo.CustomerTypeId);
+            ViewData["CustomerTypeIdOld"] = customerCustomerDemo.CustomerTypeId;
+            ViewData["CustomerIdOld"] = customerCustomerDemo.CustomerId;
+
             return View(customerCustomerDemo);
         }
 
@@ -102,18 +101,22 @@ namespace PABP_Projekat2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo)
+        public async Task<IActionResult> ConfirmEdit([Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo, string customerTypeIdOld, string customerIdOld)
         {
-            if (id != customerCustomerDemo.CustomerId)
-            {
-                return NotFound();
-            }
+            //if (id != customerCustomerDemo.CustomerId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(customerCustomerDemo);
+                    //_context.Update(customerCustomerDemo);
+                    CustomerCustomerDemo test = _context.CustomerCustomerDemos.Find(customerIdOld, customerTypeIdOld);
+
+                    _context.Remove(test);
+                    _context.Add(customerCustomerDemo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -131,21 +134,22 @@ namespace PABP_Projekat2.Controllers
             }
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId", customerCustomerDemo.CustomerId);
             ViewData["CustomerTypeId"] = new SelectList(_context.CustomerDemographics, "CustomerTypeId", "CustomerTypeId", customerCustomerDemo.CustomerTypeId);
-            return View(customerCustomerDemo);
+            return View("Edit",customerCustomerDemo);
         }
 
         // GET: CustomerCustomerDemoes/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete([Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var customerCustomerDemo = await _context.CustomerCustomerDemos
-                .Include(c => c.Customer)
-                .Include(c => c.CustomerType)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+            //var customerCustomerDemo = await _context.CustomerCustomerDemos
+            //    .Include(c => c.Customer)
+            //    .Include(c => c.CustomerType)
+            //    .FirstOrDefaultAsync(m => m.CustomerId == id);
+
             if (customerCustomerDemo == null)
             {
                 return NotFound();
@@ -157,9 +161,9 @@ namespace PABP_Projekat2.Controllers
         // POST: CustomerCustomerDemoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed([Bind("CustomerId,CustomerTypeId")] CustomerCustomerDemo customerCustomerDemo)
         {
-            var customerCustomerDemo = await _context.CustomerCustomerDemos.FindAsync(id);
+            //var customerCustomerDemo = await _context.CustomerCustomerDemos.FindAsync(id);
             _context.CustomerCustomerDemos.Remove(customerCustomerDemo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

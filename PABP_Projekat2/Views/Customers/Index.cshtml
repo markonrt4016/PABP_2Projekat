@@ -94,13 +94,6 @@
 	int currentPage = (int)ViewData["currentPage"];
 }
 
-@*<form asp-action="Index">
-		<div class="form-group">
-			<label class="control-label">Po strani:</label>
-			<select action="Index" class="form-control" name="customersByPage" asp-items="@new SelectList(new List<decimal> { 5,10,20 })"></select>
-		</div>
-	</form>*@
-
 <div class="row">
 	<div class="col-md-2">
 		@using (Html.BeginForm("Index", "Customers", FormMethod.Post, new { }))
