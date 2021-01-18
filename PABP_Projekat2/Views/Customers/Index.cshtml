@@ -95,6 +95,19 @@
 
 }
 
-@for (int i = 1; i <= totalPages; i++) {
-	<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@i">@i </a>
+<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="0">First </a>
+@for (int i = 1; i <= totalPages; i++)
+{
+	if ((int)ViewData["currentPage"] != i)
+	{
+		<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@i">@i </a>
+	}
+	else
+	{
+		<span>@i  </span>
+	}
 }
+
+
+
+<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@totalPages">Last</a>

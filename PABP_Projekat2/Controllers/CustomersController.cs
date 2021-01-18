@@ -30,6 +30,7 @@ namespace PABP_Projekat2.Controllers
             var customers = (await _context.Customers.ToListAsync());
 
             ViewData["totalCount"] = customers.Count;
+            ViewData["currentPage"] = currentPage == 0 ? 1 : currentPage;
 
 
             var customersOrdered = CustomersController.sortName ? customers.OrderBy(x => x.CompanyName) : customers.OrderByDescending(x => x.CompanyName);
