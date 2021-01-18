@@ -90,24 +90,72 @@
 </table>
 
 
-@{ int totalPages = (int)Math.Floor((int)ViewData["totalCount"] / (decimal)ViewData["customersByPage"]);
-
-
+@{ int totalPages = (int)Math.Ceiling((int)ViewData["totalCount"] / (decimal)ViewData["customersByPage"]);
+	int currentPage = (int)ViewData["currentPage"];
 }
+
+@*<form asp-action="Index">
+		<div class="form-group">
+			<label class="control-label">Po strani:</label>
+			<select action="Index" class="form-control" name="customersByPage" asp-items="@new SelectList(new List<decimal> { 5,10,20 })"></select>
+		</div>
+	</form>*@
+
+<div class="row">
+	<div class="col-md-2">
+		@using (Html.BeginForm("Index", "Customers", FormMethod.Post, new { }))
+		{
+			<div class="form-group">
+				@Html.Label("", "Customers by page:", new { @class = "control-label" })
+				@Html.DropDownList("customersByPage",
+					 new SelectList(new List<decimal> { 5, 10, 20 }),
+					 new { id = "pagesizelist", @class = "form-control" })
+			</div>
+
+		}
+	</div>
+</div>
+
 
 <a asp-action="Index" asp-controller="Customers" asp-route-currentPage="0">First </a>
-@for (int i = 1; i <= totalPages; i++)
-{
-	if ((int)ViewData["currentPage"] != i)
-	{
-		<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@i">@i </a>
-	}
-	else
-	{
-		<span>@i  </span>
-	}
+
+@{
+		if (currentPage > 1)
+		{
+			<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@(currentPage - 1)">Previous </a>
+		}
+
+		for (int i = currentPage - 2; i < currentPage; i++)
+		{
+			if (i > 0)
+			{
+				<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@i">@i </a>
+			}
+		}
+
+		<span>@currentPage </span>
+
+		for (int i = currentPage + 1; i <= currentPage + 2 && i <= totalPages; i++)
+		{
+			<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@i">@i </a>
+		}
+
+		if (currentPage + 1 <= totalPages)
+		{
+			<a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@(currentPage + 1)">Next </a>
+		}
 }
 
-
-
 <a asp-action="Index" asp-controller="Customers" asp-route-currentPage="@totalPages">Last</a>
+
+
+@section Scripts{
+	<script type="text/javascript">
+		$('#pagesizelist').on('change', function (event) {
+			var form = $(event.target).parents('form');
+
+			form.submit();
+		});
+	</script>
+}
+
